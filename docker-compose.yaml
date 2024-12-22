@@ -5,3 +5,6 @@ services:
       context: ./backend/docker/
     ports:
       -8080:8080
+    volumes:
+      - ./application:/usr/local/flask_user/
+    command: python3 run.py
