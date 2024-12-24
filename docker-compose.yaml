@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: flask_app_database
+      POSTGRES_DB: FLASK_APP_DATABASE
     ports:
       - "5432:5432"
     volumes:

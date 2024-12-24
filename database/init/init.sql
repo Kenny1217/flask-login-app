@@ -20,9 +20,9 @@ CREATE TABLE IF NOT EXISTS ROLES (
 -- Insert BAN role to ROLES table
 INSERT INTO TABLE ROLES (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION) VALUES (0, 'BAN', 'This role is for banned users');
 -- Insert USER role to ROLES table
-INSERT INTO TABLE ROLES (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION) VALUES (0, 'USER', 'This role is for regular users');
+INSERT INTO TABLE ROLES (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION) VALUES (1, 'USER', 'This role is for regular users');
 -- Insert ADMIN role to ROLES table
-INSERT INTO TABLE ROLES (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION) VALUES (0, 'ADMIN', 'This role is for admin users');
+INSERT INTO TABLE ROLES (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION) VALUES (2, 'ADMIN', 'This role is for admin users');
 
 
 
