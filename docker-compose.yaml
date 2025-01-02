@@ -1,0 +1,17 @@
+services:
+
+  backend:
+    container_name: flask_app_backend
+    build: 
+      context: ./backend/docker/
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./application:/usr/local/flask_user/
+    command: python3 run.py
+    networks:
+      - flask_app_network
+  
+networks:
+  flask_app_network:
+    driver: bridge
