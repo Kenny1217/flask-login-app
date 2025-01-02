@@ -9,8 +9,27 @@ services:
     volumes:
       - ./application:/usr/local/flask_user/
     command: python3 run.py
+    depends_on:
+      - database
     networks:
       - flask_app_network
+
+  database:
+    container_name: flask_app_database
+    image: postgres:17.2
+    environment:
+      POSTGRES_USER: POSTGRES
+      POSTGRES_PASSWORD: POSTGRES
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/database
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - flask_app_network
+
+volumes:
+  postgres_data:
   
 networks:
   flask_app_network:
