@@ -1,9 +1,10 @@
 from flask import Blueprint, request, render_template
 import bcrypt
+from app.utilities.utilities import stings_match, string_match_length
 
 auth_blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
-@auth_blueprint.route('/register')
+@auth_blueprint.route('/register',  methods=['GET', 'POST'])
 def register():
 
     # Check if it was a POST request
@@ -15,7 +16,12 @@ def register():
         unhashed_password = request.form['password']
         unhashed_password2 = request.form['password2']
 
+        PASSWORD_MIN_LEN = 8
         # Validation checks
+        if stings_match(unhashed_password, unhashed_password2):
+            return render_template('auth/register.html')
+        if string_match_length(unhashed_password, PASSWORD_MIN_LEN):
+            return render_template('auth/register.html')
 
         # Hash the password that was entered
         salt = bcrypt.gensalt()
