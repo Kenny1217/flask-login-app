@@ -5,6 +5,25 @@ auth_blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
 @auth_blueprint.route('/register')
 def register():
+
+    # Check if it was a POST request
+    if request.method == 'POST':
+
+        # Store values from page
+        username = request.form['username']
+        email = request.form['email']
+        unhashed_password = request.form['password']
+        unhashed_password2 = request.form['password2']
+
+        # Validation checks
+
+        # Hash the password that was entered
+        salt = bcrypt.gensalt()
+        unhashed_password = unhashed_password.encode("utf-8")
+        hashed_password = bcrypt.hashpw(unhashed_password, salt)
+
+        # Create user in database
+
     return render_template('auth/register.html')
 
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
