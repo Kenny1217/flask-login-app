@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template
 import bcrypt
-from app.utilities.utilities import stings_match, string_match_length
+from app.utilities.utilities import string_contains_whitespaces_or_empty, stings_match, string_match_length
 
 auth_blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -20,9 +20,14 @@ def register():
         # Validation checks
         if stings_match(unhashed_password, unhashed_password2):
             return render_template('auth/register.html')
+        
+        if string_contains_whitespaces_or_empty(username) or string_contains_whitespaces_or_empty(email) or \
+            string_contains_whitespaces_or_empty(unhashed_password) or string_contains_whitespaces_or_empty(unhashed_password2):
+            return render_template('auth/register.html')
+        
         if string_match_length(unhashed_password, PASSWORD_MIN_LEN):
             return render_template('auth/register.html')
-
+        
         # Hash the password that was entered
         salt = bcrypt.gensalt()
         unhashed_password = unhashed_password.encode("utf-8")
